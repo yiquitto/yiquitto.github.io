@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>₿LOKAID - Jüri Sunumu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .slide { display: none; }
+        .slide.active { display: block; }
+        .slide-container { min-height: 90vh; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
+
+    <div class="slide-container">
+        <!-- Slide Navigator -->
+        <div class="fixed top-4 right-4 z-50">
+            <div class="flex space-x-2">
+                <button onclick="prevSlide()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg">←</button>
+                <span id="slideCounter" class="bg-white bg-opacity-20 px-4 py-2 rounded-lg">1/10</span>
+                <button onclick="nextSlide()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg">→</button>
+            </div>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <div class="text-center">
+                    <h1 class="text-8xl font-black mb-8" style="font-family: 'Arial Black', sans-serif; letter-spacing: -4px;">
+                        ₿LOKAID
+                    </h1>
+                    <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                        Türkiye'nin İlk Blockchain Bağış Ekosistemi
+                    </h2>
+                    <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                        Blockchain teknolojisi ile şeffaf, güvenli ve sürdürülebilir sosyal yardım platformu
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-4 backdrop-blur-md">
+                            <div class="text-3xl font-black text-yellow-400">₺2.4M</div>
+                            <div class="text-sm opacity-80">Toplam Bağış</div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-4 backdrop-blur-md">
+                            <div class="text-3xl font-black text-green-400">1,847</div>
+                            <div class="text-sm opacity-80">NFT Verildi</div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-4 backdrop-blur-md">
+                            <div class="text-3xl font-black text-blue-400">156</div>
+                            <div class="text-sm opacity-80">Partner</div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-4 backdrop-blur-md">
+                            <div class="text-3xl font-black text-purple-400">%99.8</div>
+                            <div class="text-sm opacity-80">Şeffaflık</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem Statement -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">🎯 PROBLEM</h1>
+                <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <div class="bg-red-900 bg-opacity-30 rounded-2xl p-8">
+                        <h3 class="text-3xl font-bold mb-6 text-red-300">Mevcut Sorunlar</h3>
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-center"><span class="text-red-400 mr-3">❌</span> Bağış süreçlerinde şeffaflık eksikliği</li>
+                            <li class="flex items-center"><span class="text-red-400 mr-3">❌</span> Yardımların hedefe ulaştığının doğrulanamadığı</li>
+                            <li class="flex items-center"><span class="text-red-400 mr-3">❌</span> Yüksek işlem maliyetleri ve komisyonlar</li>
+                            <li class="flex items-center"><span class="text-red-400 mr-3">❌</span> Bağışçıların motivasyonunu artıran sistem eksikliği</li>
+                            <li class="flex items-center"><span class="text-red-400 mr-3">❌</span> Küçük miktarlarda bağış yapmanın zorluğu</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-900 bg-opacity-30 rounded-2xl p-8">
+                        <h3 class="text-3xl font-bold mb-6 text-green-300">₿LOKAID Çözümleri</h3>
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-center"><span class="text-green-400 mr-3">✅</span> Blockchain tabanlı tam şeffaflık</li>
+                            <li class="flex items-center"><span class="text-green-400 mr-3">✅</span> Her işlem blockchain'de kayıtlı</li>
+                            <li class="flex items-center"><span class="text-green-400 mr-3">✅</span> Düşük maliyet (Solana blockchain)</li>
+                            <li class="flex items-center"><span class="text-green-400 mr-3">✅</span> NFT rewards ve token sistemli</li>
+                            <li class="flex items-center"><span class="text-green-400 mr-3">✅</span> Alışveriş yaparken otomatik bağış</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Technical Architecture -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">🏗️ TEKNİK MİMARİ</h1>
+                <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-md">
+                        <div class="text-4xl mb-4">🌐</div>
+                        <h3 class="text-2xl font-bold mb-4">Frontend</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• 9 HTML modülü</li>
+                            <li>• Tailwind CSS</li>
+                            <li>• Responsive design</li>
+                            <li>• Real-time updates</li>
+                            <li>• Mobile optimized</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-md">
+                        <div class="text-4xl mb-4">⛓️</div>
+                        <h3 class="text-2xl font-bold mb-4">Blockchain</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• Solana Network</li>
+                            <li>• SPL Token Standard</li>
+                            <li>• Smart Contracts (Rust)</li>
+                            <li>• Multi-sig Wallet</li>
+                            <li>• IPFS Storage</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-md">
+                        <div class="text-4xl mb-4">🔗</div>
+                        <h3 class="text-2xl font-bold mb-4">Entegrasyonlar</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• Migros API</li>
+                            <li>• Trendyol API</li>
+                            <li>• Hepsiburada API</li>
+                            <li>• YemekSepeti API</li>
+                            <li>• Payment Gateways</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8">
+                        <h3 class="text-3xl font-bold mb-4 text-center">Veri Akış Şeması</h3>
+                        <div class="text-center text-lg">
+                            Kullanıcı → Platform → Blockchain → Smart Contract → Token/NFT Reward → Şeffaflık Kaydı
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: BLOKAID Token -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">🪙 BLOKAID TOKEN</h1>
+                <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+                    <div class="space-y-8">
+                        <div class="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-8">
+                            <h3 class="text-3xl font-bold mb-4">Token Özellikleri</h3>
+                            <div class="grid grid-cols-2 gap-4 text-lg">
+                                <div><strong>Sembol:</strong> BLOKAID</div>
+                                <div><strong>Standart:</strong> SPL Token</div>
+                                <div><strong>Total Supply:</strong> 1B</div>
+                                <div><strong>Decimals:</strong> 9</div>
+                                <div><strong>Mevcut Fiyat:</strong> $0.2847</div>
+                                <div><strong>Market Cap:</strong> ₺284M</div>
+                            </div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-4">Token Dağılımı</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between"><span>Public Sale</span><span>30% (300M)</span></div>
+                                <div class="flex justify-between"><span>Ecosystem Fund</span><span>25% (250M)</span></div>
+                                <div class="flex justify-between"><span>Staking Rewards</span><span>20% (200M)</span></div>
+                                <div class="flex justify-between"><span>Team & Advisors</span><span>15% (150M)</span></div>
+                                <div class="flex justify-between"><span>Marketing</span><span>10% (100M)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-4">Token Kullanımları</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center"><span class="text-green-400 mr-3">💰</span>Bağış ödemeleri</li>
+                                <li class="flex items-center"><span class="text-blue-400 mr-3">🏦</span>Staking (18.5% APY)</li>
+                                <li class="flex items-center"><span class="text-purple-400 mr-3">🗳️</span>Governance voting</li>
+                                <li class="flex items-center"><span class="text-yellow-400 mr-3">🎯</span>Premium üyelik</li>
+                                <li class="flex items-center"><span class="text-red-400 mr-3">🔄</span>Yield farming</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-4">Deflation Mekanizması</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li>• Her işlemde %0.1 token yakılır</li>
+                                <li>• Üç ayda bir gelir yakma</li>
+                                <li>• Supply azalması = fiyat artışı</li>
+                                <li>• Sürdürülebilir ekonomi modeli</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: NFT Reward System -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">🏆 NFT REWARD SİSTEMİ</h1>
+                <div class="grid md:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
+                    <div class="bg-gradient-to-b from-yellow-600 to-yellow-800 rounded-2xl p-6 text-center">
+                        <div class="text-5xl mb-4">🥉</div>
+                        <h3 class="text-2xl font-bold mb-2">BRONZE</h3>
+                        <p class="text-lg mb-4">100+ TL Bağış</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• %5 token bonus</li>
+                            <li>• Temel rozet</li>
+                            <li>• Community access</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-b from-gray-400 to-gray-600 rounded-2xl p-6 text-center">
+                        <div class="text-5xl mb-4">🥈</div>
+                        <h3 class="text-2xl font-bold mb-2">SILVER</h3>
+                        <p class="text-lg mb-4">500+ TL Bağış</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• %10 token bonus</li>
+                            <li>• Premium support</li>
+                            <li>• Early access</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-2xl p-6 text-center">
+                        <div class="text-5xl mb-4">🥇</div>
+                        <h3 class="text-2xl font-bold mb-2">GOLD</h3>
+                        <p class="text-lg mb-4">1000+ TL Bağış</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• %20 token bonus</li>
+                            <li>• Governance rights</li>
+                            <li>• VIP features</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-b from-blue-400 to-purple-600 rounded-2xl p-6 text-center">
+                        <div class="text-5xl mb-4">💎</div>
+                        <h3 class="text-2xl font-bold mb-2">PLATINUM</h3>
+                        <p class="text-lg mb-4">5000+ TL Bağış</p>
+                        <ul class="text-sm space-y-1">
+                            <li>• %50 token bonus</li>
+                            <li>• Custom NFT</li>
+                            <li>• Ambassador program</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md max-w-4xl mx-auto">
+                    <h3 class="text-3xl font-bold mb-4 text-center">Smart Contract NFT Mint Process</h3>
+                    <div class="bg-gray-900 rounded-lg p-4 text-green-400 font-mono text-sm">
+                        <div>function mint_reward_nft(donation_amount, donor_address) {</div>
+                        <div>&nbsp;&nbsp;tier = calculate_nft_tier(donation_amount);</div>
+                        <div>&nbsp;&nbsp;nft_metadata = generate_metadata(tier, donor_address);</div>
+                        <div>&nbsp;&nbsp;mint_to_user(donor_address, nft_metadata);</div>
+                        <div>&nbsp;&nbsp;emit NFTRewardEvent(donor_address, tier, timestamp);</div>
+                        <div>}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Transparency Dashboard -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">📊 ŞEFFAFLIK SİSTEMİ</h1>
+                <div class="grid md:grid-cols-2 gap-8 max-w-7xl mx-auto">
+                    <div class="space-y-6">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-md">
+                            <h3 class="text-2xl font-bold mb-4">Blockchain Kayıt</h3>
+                            <div class="bg-gray-900 rounded-lg p-4 text-green-400 font-mono text-xs">
+                                <div>{</div>
+                                <div>&nbsp;"tx": "0xabc123...",</div>
+                                <div>&nbsp;"donor": "wallet_addr",</div>
+                                <div>&nbsp;"amount": "1000 BLOKAID",</div>
+                                <div>&nbsp;"recipient": "org_id",</div>
+                                <div>&nbsp;"timestamp": "2024-12-15",</div>
+                                <div>&nbsp;"status": "completed"</div>
+                                <div>}</div>
+                            </div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-md">
+                            <h3 class="text-2xl font-bold mb-4">Skorlama Algoritması</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Belge Tamamlık: 20 puan</li>
+                                <li>• Yanıt Hızı: 20 puan</li>
+                                <li>• Toplum Geri Bildirim: 30 puan</li>
+                                <li>• Denetim Sonucu: 25 puan</li>
+                                <li>• Bonus Faktörler: 5 puan</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-md">
+                            <h3 class="text-2xl font-bold mb-4">Örnek Kurumsal Skorlar</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span>Türk Kızılayı</span>
+                                    <div class="flex items-center">
+                                        <div class="w-32 bg-gray-700 rounded-full h-3 mr-2">
+                                            <div class="bg-green-500 h-3 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                        <span>5.0/5</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>UNICEF</span>
+                                    <div class="flex items-center">
+                                        <div class="w-32 bg-gray-700 rounded-full h-3 mr-2">
+                                            <div class="bg-green-500 h-3 rounded-full" style="width: 98%"></div>
+                                        </div>
+                                        <span>4.9/5</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>TEMA Vakfı</span>
+                                    <div class="flex items-center">
+                                        <div class="w-32 bg-gray-700 rounded-full h-3 mr-2">
+                                            <div class="bg-green-500 h-3 rounded-full" style="width: 96%"></div>
+                                        </div>
+                                        <span>4.8/5</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Darüşşafaka</span>
+                                    <div class="flex items-center">
+                                        <div class="w-32 bg-gray-700 rounded-full h-3 mr-2">
+                                            <div class="bg-yellow-500 h-3 rounded-full" style="width: 94%"></div>
+                                        </div>
+                                        <span>4.7/5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-md">
+                            <h3 class="text-2xl font-bold mb-4">Real-time Tracking</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>✅ Anlık bağış takibi</li>
+                                <li>✅ Fon dağıtım grafiği</li>
+                                <li>✅ Kullanım raporları</li>
+                                <li>✅ Blockchain doğrulama</li>
+                                <li>✅ Mobil bildirimler</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: E-commerce Integration -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">🛒 E-TİCARET ENTEGRASYONU</h1>
+                <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+                    <div class="space-y-8">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-6">Partner Platformlar</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-red-600 bg-opacity-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl mb-2">🛍️</div>
+                                    <div class="font-bold">Migros</div>
+                                    <div class="text-sm">%1.5 komisyon</div>
+                                </div>
+                                <div class="bg-orange-600 bg-opacity-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl mb-2">👕</div>
+                                    <div class="font-bold">Trendyol</div>
+                                    <div class="text-sm">%2.5 komisyon</div>
+                                </div>
+                                <div class="bg-green-600 bg-opacity-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl mb-2">📱</div>
+                                    <div class="font-bold">Hepsiburada</div>
+                                    <div class="text-sm">%2.0 komisyon</div>
+                                </div>
+                                <div class="bg-purple-600 bg-opacity-50 rounded-lg p-4 text-center">
+                                    <div class="text-2xl mb-2">🍕</div>
+                                    <div class="font-bold">YemekSepeti</div>
+                                    <div class="text-sm">%3.0 komisyon</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl p-8">
+                            <h3 class="text-3xl font-bold mb-4">Karma Tabanlı Bağış</h3>
+                            <p class="text-lg mb-4">Alışveriş yaparken otomatik olarak bağış yapın!</p>
+                            <ul class="space-y-2">
+                                <li>• Komisyon gelirinin %80'i yardım</li>
+                                <li>• %20'si platform maliyeti</li>
+                                <li>• BLOKAID token reward</li>
+                                <li>• NFT kazanım sistemi</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-4">API Entegrasyon Süreci</h3>
+                            <div class="bg-gray-900 rounded-lg p-4 text-green-400 font-mono text-xs">
+                                <div>1. User shops on partner platform</div>
+                                <div>2. Platform API captures transaction</div>
+                                <div>3. Commission calculated automatically</div>
+                                <div>4. 80% converted to donation</div>
+                                <div>5. BLOKAID tokens minted as reward</div>
+                                <div>6. NFT tier calculated and minted</div>
+                                <div>7. Transaction recorded on blockchain</div>
+                            </div>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-4">Gelir Modeli</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span>Platform komisyonu:</span>
+                                    <span class="font-bold">$1.2M/ay</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Premium üyelik:</span>
+                                    <span class="font-bold">$400K/ay</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>NFT marketplace:</span>
+                                    <span class="font-bold">$300K/ay</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Staking fees:</span>
+                                    <span class="font-bold">$200K/ay</span>
+                                </div>
+                                <hr class="border-gray-600">
+                                <div class="flex justify-between text-xl font-bold">
+                                    <span>Toplam:</span>
+                                    <span class="text-green-400">$2.1M/ay</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Innovation Features -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">💡 İNOVASYON ÖZELLİKLERİ</h1>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <div class="bg-gradient-to-b from-purple-600 to-indigo-700 rounded-2xl p-8 text-center">
+                        <div class="text-5xl mb-4">🤖</div>
+                        <h3 class="text-2xl font-bold mb-4">AI Destekli Öneri</h3>
+                        <p class="text-sm">Kullanıcı davranışlarını analiz ederek kişiselleştirilmiş bağış önerileri</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-green-600 to-emerald-700 rounded-2xl p-8 text-center">
+                        <div class="text-5xl mb-4">🎮</div>
+                        <h3 class="text-2xl font-bold mb-4">Gamification</h3>
+                        <p class="text-sm">Leaderboard, rozetler ve sosyal medya entegrasyonuyla motivasyon artırma</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-blue-600 to-cyan-700 rounded-2xl p-8 text-center">
+                        <div class="text-5xl mb-4">📱</div>
+                        <h3 class="text-2xl font-bold mb-4">Cross-Platform</h3>
+                        <p class="text-sm">Web, mobile app ve sosyal medya entegrasyonu ile her yerden erişim</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-yellow-600 to-orange-700 rounded-2xl p-8 text-center">
+                        <div class="text-5xl mb-4">⚡</div>
+                        <h3 class="text-2xl font-bold mb-4">Instant Rewards</h3>
+                        <p class="text-sm">Bağış anında token ve NFT reward sistemi ile anlık motivasyon</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-red-600 to-pink-700 rounded-2xl p-8 text-center">
+                        <div class="text-5xl mb-4">🔍</div>
+                        <h3 class="text-2xl font-bold mb-4">Real-time Tracking</h3>
+                        <p class="text-sm">Bağışların gerçek zamanlı takibi ve blockchain doğrulaması</p>
+                    </div>
+                    <div class="bg-gradient-to-b from-indigo-600 to-purple-700 rounded-2xl p-8 text-center">
+                        <div class="text-5xl mb-4">🌍</div>
+                        <h3 class="text-2xl font-bold mb-4">Global Scale</h3>
+                        <p class="text-sm">Uluslararası genişleme ve multi-currency desteği ile global erişim</p>
+                    </div>
+                </div>
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                        <h3 class="text-3xl font-bold mb-4 text-center">Teknik İnovasyon Metrikleri</h3>
+                        <div class="grid md:grid-cols-4 gap-4 text-center">
+                            <div>
+                                <div class="text-3xl font-bold text-green-400">< 2s</div>
+                                <div class="text-sm">Page Load Time</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-blue-400">< 5s</div>
+                                <div class="text-sm">Transaction Confirm</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-yellow-400">99.9%</div>
+                                <div class="text-sm">Uptime</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-purple-400">1000+</div>
+                                <div class="text-sm">TPS Capacity</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Market & Competition -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">📈 PAZAR ANALİZİ</h1>
+                <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+                    <div class="space-y-8">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-6">Türkiye Pazar Büyüklüğü</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span>Yıllık bağış hacmi:</span>
+                                    <span class="font-bold text-green-400">₺15 Milyar</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Online alışveriş:</span>
+                                    <span class="font-bold text-blue-400">₺180 Milyar</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Aktif internet kullanıcı:</span>
+                                    <span class="font-bold text-yellow-400">65 Milyon</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Kripto kullanıcı:</span>
+                                    <span class="font-bold text-purple-400">2.5 Milyon</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-8">
+                            <h3 class="text-3xl font-bold mb-4">Hedeflenen Pazar Payı</h3>
+                            <div class="text-center">
+                                <div class="text-5xl font-black mb-2">%5</div>
+                                <div class="text-lg">Türkiye bağış pazarı (₺750M/yıl)</div>
+                                <div class="mt-4 text-4xl font-black">%1</div>
+                                <div class="text-lg">Online alışveriş komisyonu (₺1.8M/yıl)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-6">Rekabet Avantajları</h3>
+                            <ul class="space-y-3 text-lg">
+                                <li class="flex items-center">
+                                    <span class="text-green-400 mr-3">✅</span>
+                                    <span>İlk blockchain tabanlı bağış platformu</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-400 mr-3">✅</span>
+                                    <span>E-ticaret entegrasyonu ile pasif bağış</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-400 mr-3">✅</span>
+                                    <span>NFT reward sistemi ile motivasyon</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-400 mr-3">✅</span>
+                                    <span>%99.8 şeffaflık skoru</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-400 mr-3">✅</span>
+                                    <span>DeFi yield farming opportunities</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-md">
+                            <h3 class="text-3xl font-bold mb-6">5 Yıllık Projeksiyon</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span>2024:</span>
+                                    <span class="font-bold">₺10M bağış hacmi</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>2025:</span>
+                                    <span class="font-bold">₺50M bağış hacmi</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>2026:</span>
+                                    <span class="font-bold">₺150M bağış hacmi</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>2027:</span>
+                                    <span class="font-bold">₺400M bağış hacmi</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>2028:</span>
+                                    <span class="font-bold">₺750M bağış hacmi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Roadmap & Conclusion -->
+        <div class="slide">
+            <div class="flex flex-col items-center justify-center min-h-screen p-8">
+                <h1 class="text-6xl font-black mb-12">🚀 ROADMAP & HEDEFLER</h1>
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-8 mb-12">
+                        <div class="bg-gradient-to-b from-green-600 to-emerald-700 rounded-2xl p-8">
+                            <h3 class="text-3xl font-bold mb-4">2024 Q4 ✅</h3>
+                            <ul class="space-y-2 text-lg">
+                                <li>• MVP Platform Launch</li>
+                                <li>• BLOKAID Token Launch</li>
+                                <li>• 4 E-ticaret entegrasyonu</li>
+                                <li>• NFT reward sistemi</li>
+                                <li>• 10K kullanıcı hedefi</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-b from-blue-600 to-cyan-700 rounded-2xl p-8">
+                            <h3 class="text-3xl font-bold mb-4">2025 Q1-Q2 🚧</h3>
+                            <ul class="space-y-2 text-lg">
+                                <li>• Mobile App (iOS/Android)</li>
+                                <li>• 20 platform entegrasyonu</li>
+                                <li>• DAO Governance</li>
+                                <li>• DeFi yield farming</li>
+                                <li>• 100K kullanıcı hedefi</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-b from-purple-600 to-indigo-700 rounded-2xl p-8">
+                            <h3 class="text-3xl font-bold mb-4">2025 Q3-Q4 🎯</h3>
+                            <ul class="space-y-2 text-lg">
+                                <li>• Uluslararası expansion</li>
+                                <li>• AI-powered recommendations</li>
+                                <li>• Layer 2 scaling</li>
+                                <li>• Institutional partnerships</li>
+                                <li>• 1M kullanıcı hedefi</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-12 text-center">
+                        <h2 class="text-5xl font-black mb-6">₿LOKAID VİZYONU</h2>
+                        <p class="text-2xl mb-8 font-bold">
+                            "Blockchain teknolojisi ile sosyal yardımlaşmayı demokratikleştirmek, 
+                            şeffaflığı maksimuma çıkarmak ve sürdürülebilir bir bağış ekosistemi yaratmak"
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-8 text-xl font-bold">
+                            <div>
+                                <div class="text-4xl mb-2">🌍</div>
+                                <div>GLOBAL ETKİ</div>
+                            </div>
+                            <div>
+                                <div class="text-4xl mb-2">🔗</div>
+                                <div>BLOCKCHAIN GÜÇ</div>
+                            </div>
+                            <div>
+                                <div class="text-4xl mb-2">💎</div>
+                                <div>SÜRDÜRÜLEBİLİRLİK</div>
+                            </div>
+                        </div>
+                        <div class="mt-8 text-2xl font-black">
+                            Jürinin Dikkatine Teşekkürler! 🙏
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n - 1].classList.add('active');
+            
+            document.getElementById('slideCounter').textContent = `${n}/${totalSlides}`;
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Auto-advance for demo (optional)
+        // setInterval(() => {
+        //     nextSlide();
+        //     if (currentSlide === totalSlides) {
+        //         setTimeout(() => showSlide(1), 5000);
+        //     }
+        // }, 15000);
+    </script>
+</body>
+</html>
